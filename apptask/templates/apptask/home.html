@@ -1,0 +1,41 @@
+{% extends 'apptask/base.html' %}
+
+{% block body %}
+
+<input type="button" value="Print Data" class="btn btn-danger float-right" id="btnPrint"/>
+
+<table class="table table-striped mt-4" id="data-table">
+  <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <th>Weight Scale Date</th>
+      <th>License Plate Number</th>
+      <th>Created Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for data in datas %}
+        <tr>
+            <td>{{data.id}}</td>
+            <td>{{data.weight_scale}}</td>
+            <td>{{data.license_scale}}</td>
+            <td>{{data.created_date|date:'Y-m-d H:i'}}</td>
+        </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+
+{% endblock body %}
+
+{% block bottom %}
+    <script>
+
+        $("#btnPrint").click(function (){
+            $('#data-table').tableExport({
+                type:'pdf',
+                fileName: 'kotai_electronics',
+            });
+        } );
+    </script>
+{% endblock bottom %}
