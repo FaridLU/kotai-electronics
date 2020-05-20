@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), # new
     path('', include('apptask.urls')),
 
+    # pass 'access_token' as Barrer auth token while making any request
+    path('api/', include('apptask.api.urls')),
+    path('api/', include('accounts.api.urls')),
+
+    path('api/token/create/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),  # POST request (email, password is required)
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'), 
 ]
