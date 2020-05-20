@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from django.contrib.auth import password_validation
-# from accounts.models import *
-
 
 from django.contrib.auth import get_user_model
 
@@ -31,3 +29,14 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'last_name': 'User must have a last name'})
         
         return super(UserSerializer, self).validate(data)
+
+class UpdatePasswordSerializer(serializers.Serializer):
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        password_validation.validate_password(value)
+        return value

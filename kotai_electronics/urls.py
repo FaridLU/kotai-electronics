@@ -26,6 +26,6 @@ urlpatterns = [
     path('api/', include('apptask.api.urls')),
     path('api/', include('accounts.api.urls')),
 
-    path('api/token/create/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),  # POST request (email, password is required)
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'), 
+    # path('api/token/create/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),  # POST request (email, password is required)
+    # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'), 
 ]
